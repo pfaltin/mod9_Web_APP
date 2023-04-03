@@ -4,6 +4,7 @@ using MVC1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoWebShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230403075108_InitialOnDevW")]
+    partial class InitialOnDevW
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,43 +126,6 @@ namespace DemoWebShop.Migrations
                     b.HasKey("CatrgoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CatrgoryId = 1,
-                            Description = "Cat desc 1",
-                            Image = "/1catimg.png",
-                            Title = "Kreme"
-                        },
-                        new
-                        {
-                            CatrgoryId = 2,
-                            Description = "Cat desc 2",
-                            Image = "/2catimg.png",
-                            Title = "Losioni"
-                        },
-                        new
-                        {
-                            CatrgoryId = 3,
-                            Description = "Cat desc 3",
-                            Image = "/3catimg.png",
-                            Title = "Dezodoransi"
-                        },
-                        new
-                        {
-                            CatrgoryId = 4,
-                            Description = "Cat desc 4",
-                            Image = "/4catimg.png",
-                            Title = "Eter Ulja"
-                        },
-                        new
-                        {
-                            CatrgoryId = 5,
-                            Description = "Cat desc 5",
-                            Image = "/5catimg.png",
-                            Title = "Razno"
-                        });
                 });
 
             modelBuilder.Entity("DemoWebShop.Models.Order", b =>
@@ -258,58 +223,6 @@ namespace DemoWebShop.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            Description = "A",
-                            Image = "/a.png",
-                            InStock = 1.00m,
-                            Price = 1.01m,
-                            Sku = "SA",
-                            Title = "AARt"
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            Description = "B",
-                            Image = "/b.png",
-                            InStock = 2.00m,
-                            Price = 2.01m,
-                            Sku = "SB",
-                            Title = "BArt"
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            Description = "C",
-                            Image = "/c.png",
-                            InStock = 3.00m,
-                            Price = 3.01m,
-                            Sku = "SC",
-                            Title = "CArt"
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            Description = "D",
-                            Image = "/d.png",
-                            InStock = 4.00m,
-                            Price = 4.01m,
-                            Sku = "SD",
-                            Title = "DArt"
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            Description = "E",
-                            Image = "/e.png",
-                            InStock = 5.00m,
-                            Price = 5.01m,
-                            Sku = "SE",
-                            Title = "EARt"
-                        });
                 });
 
             modelBuilder.Entity("DemoWebShop.Models.ProductCategory", b =>
