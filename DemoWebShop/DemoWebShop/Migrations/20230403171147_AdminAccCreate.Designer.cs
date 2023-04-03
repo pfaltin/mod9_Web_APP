@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoWebShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230330191410_CreateMainModelTables")]
-    partial class CreateMainModelTables
+    [Migration("20230403171147_AdminAccCreate")]
+    partial class AdminAccCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,6 +104,239 @@ namespace DemoWebShop.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("DemoWebShop.Models.Category", b =>
+                {
+                    b.Property<int>("CatrgoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatrgoryId"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("CatrgoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CatrgoryId = 1,
+                            Description = "Cat desc 1",
+                            Image = "/1catimg.png",
+                            Title = "1.Cat"
+                        },
+                        new
+                        {
+                            CatrgoryId = 2,
+                            Description = "Cat desc 2",
+                            Image = "/2catimg.png",
+                            Title = "2.Cat"
+                        },
+                        new
+                        {
+                            CatrgoryId = 3,
+                            Description = "Cat desc 3",
+                            Image = "/3catimg.png",
+                            Title = "3.Cat"
+                        },
+                        new
+                        {
+                            CatrgoryId = 4,
+                            Description = "Cat desc 4",
+                            Image = "/4catimg.png",
+                            Title = "4.Cat"
+                        },
+                        new
+                        {
+                            CatrgoryId = 5,
+                            Description = "Cat desc 5",
+                            Image = "/5catimg.png",
+                            Title = "5.Cat"
+                        });
+                });
+
+            modelBuilder.Entity("DemoWebShop.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("DemoWebShop.Models.OrderItem", b =>
+                {
+                    b.Property<int>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"), 1L, 1);
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("DemoWebShop.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal>("InStock")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<string>("Sku")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            Description = "A",
+                            Image = "/a.png",
+                            InStock = 1.00m,
+                            Price = 1.01m,
+                            Sku = "SA",
+                            Title = "AARt"
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            Description = "B",
+                            Image = "/b.png",
+                            InStock = 2.00m,
+                            Price = 2.01m,
+                            Sku = "SB",
+                            Title = "BArt"
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            Description = "C",
+                            Image = "/c.png",
+                            InStock = 3.00m,
+                            Price = 3.01m,
+                            Sku = "SC",
+                            Title = "CArt"
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            Description = "D",
+                            Image = "/d.png",
+                            InStock = 4.00m,
+                            Price = 4.01m,
+                            Sku = "SD",
+                            Title = "DArt"
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            Description = "E",
+                            Image = "/e.png",
+                            InStock = 5.00m,
+                            Price = 5.01m,
+                            Sku = "SE",
+                            Title = "EARt"
+                        });
+                });
+
+            modelBuilder.Entity("DemoWebShop.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("ProductCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductCategoryId"), 1L, 1);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductCategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductCategories");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -129,6 +362,22 @@ namespace DemoWebShop.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "5109cf15 - d38d - 4fe9 - b385 - 2972b2d2bb20",
+                            ConcurrencyStamp = "febeb9e7-7daf-4316-b7de-429d9fa816cc",
+                            Name = "Administrators",
+                            NormalizedName = "ADMINISTRATORS"
+                        },
+                        new
+                        {
+                            Id = "41112308 - 4603 - 420b - be22 - 3af8a2166be1",
+                            ConcurrencyStamp = "254aab8f-137d-4cc5-9e3b-093d16ae1d3e",
+                            Name = "Customers",
+                            NormalizedName = "CUSTOMERS"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -239,6 +488,55 @@ namespace DemoWebShop.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("DemoWebShop.Models.Order", b =>
+                {
+                    b.HasOne("DemoWebShop.Areas.Identity.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DemoWebShop.Models.OrderItem", b =>
+                {
+                    b.HasOne("DemoWebShop.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DemoWebShop.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DemoWebShop.Models.ProductCategory", b =>
+                {
+                    b.HasOne("DemoWebShop.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DemoWebShop.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

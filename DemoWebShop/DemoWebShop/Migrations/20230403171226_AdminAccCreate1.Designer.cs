@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoWebShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230403075108_InitialOnDevW")]
-    partial class InitialOnDevW
+    [Migration("20230403171226_AdminAccCreate1")]
+    partial class AdminAccCreate1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,6 +102,27 @@ namespace DemoWebShop.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e4e48ebc - dde2 - 44ef - aa10 - f77c91acc588",
+                            AccessFailedCount = 0,
+                            Address = "Donji Glib 56",
+                            ConcurrencyStamp = "c3218515-ded5-4876-9484-1321858d595f",
+                            Email = "admin@tvrtka.com",
+                            EmailConfirmed = false,
+                            FirstName = "Tvrtko",
+                            LastName = "Tvrdic",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@TVRTKA.COM",
+                            NormalizedUserName = "ADMIN@TVRTKA.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENvxR3fukWlVWP2STAx8252+6BmigQAQAcyUfYIQk5KHVfmIMtqKtAeRwDU9BKz38Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "d79c05db-3e44-4139-85a7-8e010aedfa78",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@tvrtka.com"
+                        });
                 });
 
             modelBuilder.Entity("DemoWebShop.Models.Category", b =>
@@ -126,6 +147,43 @@ namespace DemoWebShop.Migrations
                     b.HasKey("CatrgoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CatrgoryId = 1,
+                            Description = "Cat desc 1",
+                            Image = "/1catimg.png",
+                            Title = "1.Cat"
+                        },
+                        new
+                        {
+                            CatrgoryId = 2,
+                            Description = "Cat desc 2",
+                            Image = "/2catimg.png",
+                            Title = "2.Cat"
+                        },
+                        new
+                        {
+                            CatrgoryId = 3,
+                            Description = "Cat desc 3",
+                            Image = "/3catimg.png",
+                            Title = "3.Cat"
+                        },
+                        new
+                        {
+                            CatrgoryId = 4,
+                            Description = "Cat desc 4",
+                            Image = "/4catimg.png",
+                            Title = "4.Cat"
+                        },
+                        new
+                        {
+                            CatrgoryId = 5,
+                            Description = "Cat desc 5",
+                            Image = "/5catimg.png",
+                            Title = "5.Cat"
+                        });
                 });
 
             modelBuilder.Entity("DemoWebShop.Models.Order", b =>
@@ -223,6 +281,58 @@ namespace DemoWebShop.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            Description = "A",
+                            Image = "/a.png",
+                            InStock = 1.00m,
+                            Price = 1.01m,
+                            Sku = "SA",
+                            Title = "AARt"
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            Description = "B",
+                            Image = "/b.png",
+                            InStock = 2.00m,
+                            Price = 2.01m,
+                            Sku = "SB",
+                            Title = "BArt"
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            Description = "C",
+                            Image = "/c.png",
+                            InStock = 3.00m,
+                            Price = 3.01m,
+                            Sku = "SC",
+                            Title = "CArt"
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            Description = "D",
+                            Image = "/d.png",
+                            InStock = 4.00m,
+                            Price = 4.01m,
+                            Sku = "SD",
+                            Title = "DArt"
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            Description = "E",
+                            Image = "/e.png",
+                            InStock = 5.00m,
+                            Price = 5.01m,
+                            Sku = "SE",
+                            Title = "EARt"
+                        });
                 });
 
             modelBuilder.Entity("DemoWebShop.Models.ProductCategory", b =>
@@ -273,6 +383,22 @@ namespace DemoWebShop.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "5109cf15 - d38d - 4fe9 - b385 - 2972b2d2bb20",
+                            ConcurrencyStamp = "baa1089a-cc64-4a68-b4f2-656ae813ef2f",
+                            Name = "Administrators",
+                            NormalizedName = "ADMINISTRATORS"
+                        },
+                        new
+                        {
+                            Id = "41112308 - 4603 - 420b - be22 - 3af8a2166be1",
+                            ConcurrencyStamp = "a7d991e6-9f24-4ff1-9913-e310943b3e36",
+                            Name = "Customers",
+                            NormalizedName = "CUSTOMERS"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -362,6 +488,13 @@ namespace DemoWebShop.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "e4e48ebc - dde2 - 44ef - aa10 - f77c91acc588",
+                            RoleId = "5109cf15 - d38d - 4fe9 - b385 - 2972b2d2bb20"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
