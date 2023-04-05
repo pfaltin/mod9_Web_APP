@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DemoWebShop.Models;
-using MVC1.Data;
+using DemoWebShop.Data;
 
 namespace DemoWebShop.Areas.Admin.Controllers
 {
@@ -37,7 +37,7 @@ namespace DemoWebShop.Areas.Admin.Controllers
             }
 
             var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CatrgoryId == id);
+                .FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -89,9 +89,9 @@ namespace DemoWebShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CatrgoryId,Title,Description,Image")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Title,Description,Image")] Category category)
         {
-            if (id != category.CatrgoryId)
+            if (id != category.CategoryId)
             {
                 return NotFound();
             }
@@ -105,7 +105,7 @@ namespace DemoWebShop.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CatrgoryId))
+                    if (!CategoryExists(category.CategoryId))
                     {
                         return NotFound();
                     }
@@ -128,7 +128,7 @@ namespace DemoWebShop.Areas.Admin.Controllers
             }
 
             var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CatrgoryId == id);
+                .FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -158,7 +158,7 @@ namespace DemoWebShop.Areas.Admin.Controllers
 
         private bool CategoryExists(int id)
         {
-          return (_context.Categories?.Any(e => e.CatrgoryId == id)).GetValueOrDefault();
+          return (_context.Categories?.Any(e => e.CategoryId == id)).GetValueOrDefault();
         }
     }
 }

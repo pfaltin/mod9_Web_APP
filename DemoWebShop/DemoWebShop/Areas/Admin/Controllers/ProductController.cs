@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DemoWebShop.Models;
-using MVC1.Data;
+using DemoWebShop.Data;
 
 namespace DemoWebShop.Areas.Admin.Controllers
 {

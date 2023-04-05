@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;using Microsoft.EntityFrameworkCore;using DemoWebShop.Areas.Identity.Data;using MVC1.Data;namespace DemoWebShop;public class Program{    public static void Main(string[] args)    {        var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Identity;using Microsoft.EntityFrameworkCore;using DemoWebShop.Areas.Identity.Data;using DemoWebShop.Data;namespace DemoWebShop;public class Program{    public static void Main(string[] args)    {        var builder = WebApplication.CreateBuilder(args);
 
         // dohvat connection string
         var connectionString = builder.Configuration.GetConnectionString("DevStatM") ?? throw new InvalidOperationException("Connection string 'DevStatM' not found.");
