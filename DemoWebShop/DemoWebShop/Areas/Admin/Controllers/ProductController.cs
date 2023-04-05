@@ -49,6 +49,8 @@ namespace DemoWebShop.Areas.Admin.Controllers
         // GET: Admin/Product/Create
         public IActionResult Create()
         {
+            //1. korak slanje poruke u view
+            ViewBag.ErrorMessage = TempData["ErrorMessage"] as string ?? "";
             return View();
         }
 
@@ -59,12 +61,35 @@ namespace DemoWebShop.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductId,Title,Description,InStock,Price,Image,Sku")] Product product, int[] categoryIds)
         {
+            // 1. korak validacije ulaza 
+            if (categoryIds.Length == 0 || categoryIds == null)
+            {
+                // izbaci poruku
+                // TempData je kolekcija koja kreira kretkorocne poruke u sesiji izmedju dva kontrolera
+                TempData["ErrorMessage"] = "Odaberi kategoriju";
+                return RedirectToAction(nameof(Create));
+            }
+
+            //2, korak upiši u tablicu i upiši u agregaciju -ProductCategorys
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+
+                foreach(var catId in categoryIds)
+                {
+                    ProductCategory productCategory = new ProductCategory();
+                    productCategory.CategoryId = catId;
+                    productCategory.ProductId = product.ProductId;
+
+                    _context.ProductCategories.Add(productCategory);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
+            await _context.SaveChangesAsync();
             return View(product);
         }
 
