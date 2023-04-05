@@ -86,7 +86,7 @@ namespace DemoWebShop.Areas.Admin.Controllers
 
                     _context.ProductCategories.Add(productCategory);
                 }
-
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             await _context.SaveChangesAsync();

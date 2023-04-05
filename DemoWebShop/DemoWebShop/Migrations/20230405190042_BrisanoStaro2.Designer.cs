@@ -4,6 +4,7 @@ using DemoWebShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoWebShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230405190042_BrisanoStaro2")]
+    partial class BrisanoStaro2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +109,7 @@ namespace DemoWebShop.Migrations
                             Id = "e4e48ebc - dde2 - 44ef - aa10 - f77c91acc588",
                             AccessFailedCount = 0,
                             Address = "Donji Glib 56",
-                            ConcurrencyStamp = "252fcbc9-aead-4638-aba1-b45a6ed69fca",
+                            ConcurrencyStamp = "a4fa1f4a-d2c5-43b2-bc1e-ed7560642f8a",
                             Email = "admin@tvrtka.com",
                             EmailConfirmed = false,
                             FirstName = "Tvrtko",
@@ -115,9 +117,9 @@ namespace DemoWebShop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TVRTKA.COM",
                             NormalizedUserName = "ADMIN@TVRTKA.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPSJ3bExsEPo5mTKCNE8ehmV/fMWH4wJ7pmYcXo5GorfztYG5T7Ipk91YPYDM8jQ2A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPZs8B9M0khDj0RfCQJ2dd8UPpV0Q65LzJ9GpkBd/gfhnM+f+1R3c1pY0h74pYYFhQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "93ede7cd-99fc-4e87-9861-b094dc6870e3",
+                            SecurityStamp = "fd56c8d3-7b26-4513-ae17-4bd549c69c27",
                             TwoFactorEnabled = false,
                             UserName = "admin@tvrtka.com"
                         });
@@ -386,14 +388,14 @@ namespace DemoWebShop.Migrations
                         new
                         {
                             Id = "5109cf15 - d38d - 4fe9 - b385 - 2972b2d2bb20",
-                            ConcurrencyStamp = "74136878-5cac-436d-bb69-1823e03ef067",
+                            ConcurrencyStamp = "897cf40f-d8de-4bac-99a0-b6264056e6db",
                             Name = "Administrators",
                             NormalizedName = "ADMINISTRATORS"
                         },
                         new
                         {
                             Id = "41112308 - 4603 - 420b - be22 - 3af8a2166be1",
-                            ConcurrencyStamp = "2ea7dfb2-f32a-419c-9bcc-023b626139d1",
+                            ConcurrencyStamp = "d7dfe3cc-5115-43e8-9a7d-1006987b6dc5",
                             Name = "Customers",
                             NormalizedName = "CUSTOMERS"
                         });
