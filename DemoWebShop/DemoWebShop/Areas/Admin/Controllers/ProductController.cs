@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DemoWebShop.Models;
 using DemoWebShop.Data;
+using System.Drawing;
 
 namespace DemoWebShop.Areas.Admin.Controllers
 {
@@ -59,7 +60,7 @@ namespace DemoWebShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Title,Description,InStock,Price,Image,Sku")] Product product, int[] categoryIds)
+        public async Task<IActionResult> Create([Bind("ProductId,Title,Description,InStock,Price,Image,Sku")] Product product, int[] categoryIds, IFormFile image )
         {
             // 1. korak validacije ulaza 
             if (categoryIds.Length == 0 || categoryIds == null)
@@ -75,6 +76,32 @@ namespace DemoWebShop.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                // 2.1 pokusaj spreminti sliku i spremi je u svojstvo product.image
+                try
+                {
+                    // pr1
+                    var imageName = image.FileName.ToLower();
+
+
+                    // odabri putanje pohran
+                    // rez: /wwwroot/images/products/naziv-jpg
+                    var saveImgPath = Path.Combine(Directory.GetCurrentDirectory(), "./wwwroot/images/products/", imageName);
+
+                    // kreiraj mape
+                    Directory.CreateDirectory(Path.GetDirectoryName(saveImgPath));
+                    // kopiranje slike
+                    using (var stream = new FileStream(saveImgPath , FileMode.Create))
+                    {
+                        
+                           image.CopyTo(stream);
+                    }
+                    product.Image = imageName;
+                }
+                catch
+                {
+                    TempData["ErrorMessage"] = "Odaberi foto";
+                    return RedirectToAction(nameof(Create));
+                }
                 _context.Add(product);
                 await _context.SaveChangesAsync();
 
