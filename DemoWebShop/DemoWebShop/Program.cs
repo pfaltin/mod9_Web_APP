@@ -4,7 +4,20 @@ namespace DemoWebShop;public class Program{    public static void Main(strin
 
         // dohvat connection string
         var connectionString = builder.Configuration.GetConnectionString("DevStatM") ?? throw new InvalidOperationException("Connection string 'DevStatM' not found.");
-        // var connectionString = builder.Configuration.GetConnectionString("DevStatW") ?? throw new InvalidOperationException("Connection string 'DevStatW' not found.");        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));        builder.Services.            AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)            .AddRoles<IdentityRole>()            .AddEntityFrameworkStores<ApplicationDbContext>();        // Add services to the container.        builder.Services.AddControllersWithViews();        // kreiranje servisa za koristenje RAZOR page opcija        builder.Services.AddRazorPages();        var app = builder.Build();        // Configure the HTTP request pipeline.        if (!app.Environment.IsDevelopment())        {            app.UseExceptionHandler("/Home/Error");            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.            app.UseHsts();        }        app.UseHttpsRedirection();        app.UseStaticFiles();
+        // var connectionString = builder.Configuration.GetConnectionString("DevStatW") ?? throw new InvalidOperationException("Connection string 'DevStatW' not found.");        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));        builder.Services.            AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)            .AddRoles<IdentityRole>()            .AddEntityFrameworkStores<ApplicationDbContext>();        builder.Services.Configure<IdentityOptions>(options =>
+        {
+            // Default Password settings.
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = true;
+            options.Password.RequiredLength = 6;
+            options.Password.RequiredUniqueChars = 1;
+        });
+
+
+        // Add services to the container.
+        builder.Services.AddControllersWithViews();        // kreiranje servisa za koristenje RAZOR page opcija        builder.Services.AddRazorPages();        var app = builder.Build();        // Configure the HTTP request pipeline.        if (!app.Environment.IsDevelopment())        {            app.UseExceptionHandler("/Home/Error");            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.            app.UseHsts();        }        app.UseHttpsRedirection();        app.UseStaticFiles();
         // postavke za rukovanje decimalnim vrijednostima
         var ci = new CultureInfo("de-De");        ci.NumberFormat.NumberDecimalSeparator = ".";        ci.NumberFormat.CurrencyDecimalSeparator = ".";        app.UseRequestLocalization(            new RequestLocalizationOptions
             {

@@ -82,6 +82,9 @@ namespace DemoWebShop.Areas.Admin.Controllers
                     // pr1
                     var imageName = image.FileName.ToLower();
 
+                    //var imageNameExt = Path.GetExtension(image.FileName);
+                    //var imageName = DateTime.Now.ToString("yyyymmdd")+ imageNameExt;
+
 
                     // odabri putanje pohran
                     // rez: /wwwroot/images/products/naziv-jpg
