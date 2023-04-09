@@ -32,7 +32,7 @@ namespace DemoWebShop.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
 
         // var koja ima pristup ASpNEtRoles
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;// = new RoleManager<IdentityRole>();
 
 
         public RegisterModel(
@@ -147,9 +147,11 @@ namespace DemoWebShop.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     //TODO problem
-                    var customerRole = _roleManager.FindByNameAsync("Customer").Result;
+                    var customerRole = _roleManager.FindByNameAsync("Customers").Result;
+                    //var customerRoleq = _roleManager.FindByNameAsync("Customers").Result;
 
-                    if(customerRole != null)
+
+                    if (customerRole != null)
                     {
                         await _userManager.AddToRoleAsync(user, customerRole.Name);
                     }
