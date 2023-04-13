@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using DemoWebShop.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using DemoWebShop.Data;
 
 namespace DemoWebShop.Areas.Identity.Pages.Account
 {
@@ -32,15 +34,20 @@ namespace DemoWebShop.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
 
         // var koja ima pristup ASpNEtRoles
-        private readonly RoleManager<IdentityRole> _roleManager;// = new RoleManager<IdentityRole>();
+        private readonly RoleManager<IdentityRole> _roleManager;
 
 
-        public RegisterModel(
+
+
+
+
+    public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -48,6 +55,7 @@ namespace DemoWebShop.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
