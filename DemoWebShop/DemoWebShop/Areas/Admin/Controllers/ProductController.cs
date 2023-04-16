@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DemoWebShop.Models;
 using DemoWebShop.Data;
 using System.Drawing;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DemoWebShop.Areas.Admin.Controllers
 {
@@ -136,6 +137,8 @@ namespace DemoWebShop.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            // ako postoji greška
+            ViewBag.ErrorMessage = TempData["ErrorMessage"] as string ?? "";
             return View(product);
         }
 
@@ -144,19 +147,83 @@ namespace DemoWebShop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Title,Description,InStock,Price,Image,Sku")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Title,Description,InStock,Price,Image,Sku")] Product product, IFormFile? newImage, int[] categoryIds)
         {
             if (id != product.ProductId)
             {
                 return NotFound();
             }
 
+            // čitanje kategorija proizvoda iz baze
+            ViewBag.ProductCategories = _context.ProductCategories.Where(p => p.ProductId == product.ProductId).Select(c => c.CategoryId).ToList();
+
+            // provjeri ima li odabrana kategorija/e
+            if (categoryIds.Length == 0 || categoryIds == null)
+            {
+                // izbaci poruku
+                // TempData je kolekcija koja kreira kretkorocne poruke u sesiji izmedju dva kontrolera
+                TempData["ErrorMessage"] = "Odaberi kategoriju";
+                return RedirectToAction(nameof(Edit));
+            }
+
+
+
             if (ModelState.IsValid)
             {
+                // 2.1 pokusaj spreminti sliku i spremi je u svojstvo product.image
+
+                    // pr1
+                    if (newImage != null)
+                    {
+                        // var imageName = newImage.FileName.ToLower();
+
+                        //var imageNameExt = Path.GetExtension(image.FileName);
+                        var imageName = DateTime.Now.ToString("yyyymmdd")+ newImage.FileName.ToLower().Replace(" ","_");
+
+
+                        // odabri putanje pohran
+                        // rez: /wwwroot/images/products/naziv-jpg
+                        var saveImgPath = Path.Combine(Directory.GetCurrentDirectory(), "./wwwroot/images/products/", imageName);
+
+                        // kreiraj mape
+                        Directory.CreateDirectory(Path.GetDirectoryName(saveImgPath));
+                        // kopiranje slike
+                        using (var stream = new FileStream(saveImgPath, FileMode.Create))
+                        {
+
+                            newImage.CopyTo(stream);
+                        }
+                        product.Image = imageName;
+                    }
+                
+
+                // _context.Add(product);
+                //await _context.SaveChangesAsync();
+
+
+
                 try
                 {
                     _context.Update(product);
                     await _context.SaveChangesAsync();
+
+
+                    //
+                    //
+                    _context.ProductCategories.RemoveRange(_context.ProductCategories.Where(p => p.ProductId == id));
+                    _context.SaveChangesAsync();
+
+                    foreach(var category in categoryIds)
+                    {
+                        ProductCategory productCategory = new ProductCategory();
+                        productCategory.ProductId = product.ProductId;
+                        productCategory.CategoryId = category;
+                        _context.Add(productCategory);
+                        _context.SaveChangesAsync();
+
+                    }
+
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -171,6 +238,7 @@ namespace DemoWebShop.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(product);
         }
 
