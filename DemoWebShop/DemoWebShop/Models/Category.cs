@@ -6,11 +6,9 @@ namespace DemoWebShop.Models
 {
 	public class Category
 	{
-		public Category()
-		{
-		}
+
 		[Key]
-		public int CatrgoryId { get; set; }
+		public int CategoryId { get; set; }
 
         [Required]
         [StringLength(200, MinimumLength =2)]

@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using DemoWebShop.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using DemoWebShop.Data;
 
 namespace DemoWebShop.Areas.Identity.Pages.Account
 {
@@ -31,12 +33,21 @@ namespace DemoWebShop.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterModel(
+        // var koja ima pristup ASpNEtRoles
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+
+
+
+
+
+    public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +55,7 @@ namespace DemoWebShop.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -98,6 +110,23 @@ namespace DemoWebShop.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            // dodano za proširenje register forme
+            [Required]
+            [Display(Name = "FirstName")]
+            public string FirstName { get; set; }
+
+            [Required]            
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
+
+            [Required]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+
+
         }
 
 
@@ -115,12 +144,27 @@ namespace DemoWebShop.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.Address = Input.Address;
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
+                    //TODO problem
+                    var customerRole = _roleManager.FindByNameAsync("Customers").Result;
+                    //var customerRoleq = _roleManager.FindByNameAsync("Customers").Result;
+
+
+                    if (customerRole != null)
+                    {
+                        await _userManager.AddToRoleAsync(user, customerRole.Name);
+                    }
+
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
