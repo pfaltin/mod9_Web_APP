@@ -37,23 +37,10 @@
         </select>
     </div>
     <div class="col-3">
-        <select class="form-select" name="filterByCat">
-            <option value="">
-                Default
-            </option>
-            <option value="1">
-                Cat1 asc
-            </option>
-            <option value="2">
-                Cat1 desc
-            </option>
-            <option value="3">
-                Cat2 asc
-            </option>
-            <option value="4">
-                Cat2 desc
-            </option>
-        </select>
+        @* ugradnja filtera po kategoriji*@
+        <partial name="_CategoryDropPartial" />
+
+
     </div>
     <div class="col-3">
         <input type="submit" class="btn btn-success" value="Search..." />

@@ -1,0 +1,17 @@
+﻿@using DemoWebShop.Data
+@inject ApplicationDbContext _dbContext
+<div class="from-group">
+    <select class="form-control" name="categoryId">
+        @foreach(var catItem in _dbContext.Categories.ToList() )
+            {
+                <!option
+                        value="@catItem.CategoryId"
+                        @if(ViewBag.ProductCategories != null){
+                                @(ViewBag.ProductCategories.Contains(catItem.CategoryId) ? "selected" : "")
+                        }
+                        >
+                    @catItem.Title
+                </!option> 
+            }
+    </select>
+</div>
