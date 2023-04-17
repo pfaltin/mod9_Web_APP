@@ -16,3 +16,12 @@ INSERT INTO m9_webshop.dbo.Categories (Title,Description,[Image]) VALUES
 	 (N'Grain',N'Seeds of cereal plants that are harvested and used for food, such as corn, wheat, and rice.',N'categoryImage.png'),
 	 (N'Shoot vegetable',N'Vegetables that are harvested as tender, young shoots, such as asparagus and bamboo shoots.',N'categoryImage.png'),
 	 (N'Flower bud vegetable',N'Vegetables that are harvested as flower buds before they bloom, such as artichokes and broccoli.',N'categoryImage.png');
+
+INSERT INTO m9_webshop.dbo.Categories
+(Title, Description, [Image])
+VALUES('Fruit', 'Fruits', 'fruits.png');
+INSERT INTO m9_webshop.dbo.Categories
+(Title, Description, [Image])
+VALUES('Vegetable', 'Vegetables', 'vegetable.png');
+
+
