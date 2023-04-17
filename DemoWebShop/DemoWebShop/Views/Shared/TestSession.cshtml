@@ -1,0 +1,27 @@
+﻿
+<h1></h1>
+<h1>Test sessija</h1>
+<hr />
+
+<p>
+    @ViewBag.ReadSessionString
+</p>
+<hr />
+
+<p>
+    @*Context - svojstvo za doći do sesije *@
+    @Context.Session.GetString("sessionString")
+
+</p>
+<hr />
+
+<p>
+    @*Context - svojstvo za doći do privacyString *@
+    @Context.Session.GetString("privacyString")
+
+</p>
+@if (!String.IsNullOrEmpty(@Context.Session.GetString("privacyString")))
+{
+    <h4>bio na Privacy sessija</h4>
+}
+

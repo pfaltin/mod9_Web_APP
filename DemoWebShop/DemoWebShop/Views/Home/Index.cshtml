@@ -8,7 +8,10 @@
     <h1>@ViewData["Title"]</h1>
     <h1>@ViewData["Description"]</h1>
 </div>
-
+<p>
+    @*Context - svojstvo za doći do sesije *@
+    @Context.Session.GetString("sessionString")
+</p>
 <form method="get" asp-area="" asp-controller="Home" asp-action="Index" class="row mb-5">
     <div class="col-3">
         <input type="text" class="from-control" name="searchQuery" />

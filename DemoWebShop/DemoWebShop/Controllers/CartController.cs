@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DemoWebShop.Controllers
 {
@@ -15,6 +14,22 @@ namespace DemoWebShop.Controllers
         {
             return View();
         }
+
+        // GET: /<controller>/
+        public IActionResult TestSession()
+        {
+            HttpContext.Session.SetString("sessionString", "vrijednost za string");
+
+            ViewBag.ReadSessionString = HttpContext.Session.GetString("sessionString");
+
+            HttpContext.Session.SetString("sessionString", "vrijednost DRUGA za string");
+          
+
+
+            return View();
+        }
+
+
     }
 }
 
