@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using DemoWebShop.Models;
 using Microsoft.AspNetCore.Authorization;
 using DemoWebShop.Data;
+using System.Collections.Generic;
 
 namespace DemoWebShop.Controllers;
 
@@ -20,15 +21,32 @@ public class HomeController : Controller
 
     }
     //[Authorize]
-    public IActionResult Index(string? searchQuery, int? orderBy)
+    public IActionResult Index(string? searchQuery, int? orderBy, int? filterByCat)
     {
         // 1. ako searchQuery == null, učitaj sve
         // 2. ako searchQuery !=null
         List<Product> products = _dbContex.Products.ToList();
+        List<Product> productsToShow = new List<Product>() ;
+
+
+        // search products
         if (!String.IsNullOrWhiteSpace(searchQuery))
         {
-            products =  products.Where(p=> p.Title.Contains(searchQuery.ToLower())).ToList();
+            products = products.Where(p => p.Title.Contains(searchQuery.ToLower())).ToList();
         }
+
+        // filter
+        List < ProductCategory >  pcat = _dbContex.ProductCategories.ToList();
+        if (filterByCat != null)
+        {
+            List<ProductCategory> filteredproducts = pcat.FindAll(c => c.CategoryId == filterByCat);
+            foreach (var pc in filteredproducts)
+            {
+                Product product = products.Find(p => p.ProductId == pc.ProductId);
+                productsToShow.Add(product);
+            }
+        }
+
         // sortiranje
         // Title asc/desc, price asc/desc
         switch (orderBy)
@@ -40,7 +58,6 @@ public class HomeController : Controller
             default: break;
 
         }
-
 
         return View(products);
     }
