@@ -1,7 +1,7 @@
 ﻿@using DemoWebShop.Data
 @inject ApplicationDbContext _dbContext
 <div class="from-group">
-    <select class="form-control" name="categoryId">
+    <select class="form-control" name="filterByCat">
         @foreach(var catItem in _dbContext.Categories.ToList() )
             {
                 <!option

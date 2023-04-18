@@ -4,6 +4,7 @@ using DemoWebShop.Models;
 using Microsoft.AspNetCore.Authorization;
 using DemoWebShop.Data;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoWebShop.Controllers;
 
@@ -21,7 +22,7 @@ public class HomeController : Controller
 
     }
     //[Authorize]
-    public IActionResult Index(string? searchQuery, int? orderBy, int? filterByCat)
+    public IActionResult Index(string? searchQuery, int? orderBy, string? filterByCat)
     {
         // 1. ako searchQuery == null, učitaj sve
         // 2. ako searchQuery !=null
@@ -32,34 +33,46 @@ public class HomeController : Controller
         // search products
         if (!String.IsNullOrWhiteSpace(searchQuery))
         {
-            products = products.Where(p => p.Title.Contains(searchQuery.ToLower())).ToList();
+            productsToShow = products.Where(p => p.Title.Contains(searchQuery.ToLower())).ToList();
+
+        }
+        else
+        {
+            productsToShow = products;
         }
 
+
+
         // filter
-        List < ProductCategory >  pcat = _dbContex.ProductCategories.ToList();
         if (filterByCat != null)
         {
-            List<ProductCategory> filteredproducts = pcat.FindAll(c => c.CategoryId == filterByCat);
+            int filterByCatId = Int32.Parse(filterByCat);
+            List<ProductCategory> pcat = _dbContex.ProductCategories.ToList();
+            List<Product> productsToShowFiltered = new List<Product>();
+
+            List<ProductCategory> filteredproducts = pcat.FindAll(c => c.CategoryId == filterByCatId);
             foreach (var pc in filteredproducts)
             {
-                Product product = products.Find(p => p.ProductId == pc.ProductId);
-                productsToShow.Add(product);
+                Product product = productsToShow.Find(p => p.ProductId == pc.ProductId);
+                productsToShowFiltered.Add(product);
             }
+            productsToShow = productsToShowFiltered;
+
         }
 
         // sortiranje
         // Title asc/desc, price asc/desc
         switch (orderBy)
         {
-            case 1: products = products.OrderBy(p => p.Title).ToList(); break;
-            case 2: products = products.OrderByDescending(p => p.Title).ToList(); break;
-            case 3: products = products.OrderBy(p => p.Price).ToList(); break;
-            case 4: products = products.OrderByDescending(p => p.Price).ToList(); break;
+            case 1: productsToShow = productsToShow.OrderBy(p => p.Title).ToList(); break;
+            case 2: productsToShow = productsToShow.OrderByDescending(p => p.Title).ToList(); break;
+            case 3: productsToShow = productsToShow.OrderBy(p => p.Price).ToList(); break;
+            case 4: productsToShow = productsToShow.OrderByDescending(p => p.Price).ToList(); break;
             default: break;
 
         }
 
-        return View(products);
+        return View(productsToShow);
     }
 
     public IActionResult Privacy()
