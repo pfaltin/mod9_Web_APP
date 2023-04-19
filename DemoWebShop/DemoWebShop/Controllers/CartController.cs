@@ -33,7 +33,7 @@ namespace DemoWebShop.Controllers
             // provjeri kosaricu iz sesije
             List<CartItem> cart = HttpContext.Session.GetCartItemFromJson(sessionCartKey);
             //
-            ViewBag.CartErrorMassage = TempData["CartErrorMassage"] as string ?? "";
+            ViewBag.CartErrorMassage = TempData["CartErrorMessage"] as string ?? "";
 
             return View(cart);
         }
@@ -96,6 +96,32 @@ namespace DemoWebShop.Controllers
             }
             else
             {
+                // ako postoji dodaj, ako ne postoji kreiraj
+                var updateOrCreateItem = cart.Find(p => p.Product.ProductId == productID) ?? new CartItem();
+
+                // količina, provjera
+
+                if(quantity + updateOrCreateItem.Quatity > findProduct.InStock)
+                {
+                    TempData["CartErrorMessage"] = $"{findProduct.Title} : nema dovoljno na stanju, ima  {findProduct.InStock} ";
+                    return RedirectToAction(nameof(Index), "Home");
+                }
+
+                // uvjet ažuriranja sesije
+
+                if(updateOrCreateItem.Quatity == 0)
+                {
+                    updateOrCreateItem.Product = findProduct;
+                    updateOrCreateItem.Quatity = quantity;
+                    cart.Add(updateOrCreateItem);
+                }
+                else
+                {
+                    updateOrCreateItem.Quatity += quantity;
+
+                }
+                // azuriraj sesiju
+                HttpContext.Session.SetCartObjectAsJSON(sessionCartKey, cart);
 
             }
 

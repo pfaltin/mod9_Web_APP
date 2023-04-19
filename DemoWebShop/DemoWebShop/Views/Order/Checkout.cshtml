@@ -1,0 +1,108 @@
+﻿@model List<DemoWebShop.Services.Cart.CartItem>
+<h1>
+    Place your order
+</h1>
+<hr />
+@*1. ispis poruka
+    2. ispis podataka košarice
+    3. polja za unos podataka kupca
+*@
+
+@if (!String.IsNullOrEmpty(ViewBag.CheckMessages))
+{
+    <div class="col-12">
+        <p class="alert-danger">
+            @ViewBag.CheckMessages
+        </p>
+    </div>
+}
+
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+            <th>
+            </th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                        </td>
+                        <td>@item.Product.Title</td>
+                        <td>@item.Product.Price.ToString("C2")</td>
+                        <td>@item.Quatity</td>
+                        <td>@item.GetTotal().ToString("C2")</td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        Grand Total:
+                    </td>
+                    <td>  @Model.Sum(s => s.GetTotal()).ToString("C2");</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+@* TODO https://getbootstrap.com/docs/5.1/forms/layout/#gutters *@@
+@* TODO dizajn-checkout-info.txt *@
+<div class="row">
+    <div class="col-12">
+        <h4>Presonal info</h4>
+
+        <form method="post" asp-controller="Order" asp-action="CreateOrder">
+            <div class="col-6 mb-3">
+                <label>First Name *</label>
+                <input type="text" name="FirstName" class="form-control" required />
+
+            </div>
+            <div class="col-6 mb-3">
+                <label>Last Name</label>
+                <input type="text" name="LastName" class="form-control" required />
+
+            </div>
+            <div class="col-6 mb-3">
+                <label>Email addres</label>
+                <input type="text" name="EmailAddres" class="form-control" required />
+            </div>
+            <div class="col-6 mb-3">
+                <label>Phone</label>
+                <input type="text" name="Phone" class="form-control" required />
+            </div>
+            <div class="col-6 mb-3">
+                <label>Address</label>
+                <input type="text" name="Address" class="form-control" required />
+            </div>
+            <div class="col-6 mb-3">
+                <label>City</label>
+                <input type="text" name="City" class="form-control" required />
+            </div>
+            <div class="col-6 mb-3">
+                <label>ZIP code</label>
+                <input type="text" name="ZIPcode" class="form-control" required />
+            </div>
+            <div class="col-6 mb-3">
+                <label>Country</label>
+                <select name="Country" class="form-select">
+                    <option value="">- select -</option>
+                    <option value="Croatia">Croatia</option>
+                    <option value="Slovenia">Slovenia</option>
+                    <option value="Bih">BiH</option>
+                </select>
+            </div>
+            <div class="col-6 mb-3">
+                <label>Message</label>
+                <textarea type="text" name="Message" class="form-control" /></textarea>
+            </div>
+
+        </form>
+    </div>
+</div>

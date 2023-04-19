@@ -29,6 +29,7 @@
     <None Remove="Services\" />
     <None Remove="Services\Cart\" />
     <None Remove="Views\Cart\" />
+    <None Remove="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
@@ -39,5 +40,6 @@
     <Folder Include="Services\" />
     <Folder Include="Services\Cart\" />
     <Folder Include="Views\Cart\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
 </Project>

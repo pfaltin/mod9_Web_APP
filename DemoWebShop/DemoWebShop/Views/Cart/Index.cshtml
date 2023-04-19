@@ -32,7 +32,7 @@ else
                 </thead>
                 <tbody>
                     @foreach(var item in Model)
-{
+                        {
                             <tr>
                                 <td>
                                 </td>
@@ -41,11 +41,17 @@ else
                                 <td>@item.Quatity</td>
                                 <td>@item.GetTotal().ToString("C2")</td>
                             </tr>
-}
+                            }
+                    <tr>
+                        <td>
+                            Grand Total:
+                        </td>
+                        <td>  @Model.Sum(s => s.GetTotal()).ToString("C2");</td>
+                    </tr>
                 </tbody>
 
             </table>
-
+            <a class="btn btn-sucess" asp-controller="Order" asp-action="Checkout">Checkout</a>
 }
 </div>
 
