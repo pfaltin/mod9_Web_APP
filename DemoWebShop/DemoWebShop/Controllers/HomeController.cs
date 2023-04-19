@@ -60,6 +60,7 @@ public class HomeController : Controller
 
         }
 
+
         // sortiranje
         // Title asc/desc, price asc/desc
         switch (orderBy)
