@@ -28,6 +28,7 @@
     <None Remove="Areas\Admin\Views\Shared\" />
     <None Remove="Services\" />
     <None Remove="Services\Cart\" />
+    <None Remove="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
@@ -37,5 +38,6 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Cart\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
 </Project>

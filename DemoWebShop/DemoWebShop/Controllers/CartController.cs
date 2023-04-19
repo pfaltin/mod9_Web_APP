@@ -30,7 +30,12 @@ namespace DemoWebShop.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            // provjeri kosaricu iz sesije
+            List<CartItem> cart = HttpContext.Session.GetCartItemFromJson(sessionCartKey);
+            //
+            ViewBag.CartErrorMassage = TempData["CartErrorMassage"] as string ?? "";
+
+            return View(cart);
         }
 
         // GET: /<controller>/
