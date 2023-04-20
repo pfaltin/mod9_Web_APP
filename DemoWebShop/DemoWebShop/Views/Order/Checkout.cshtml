@@ -12,7 +12,7 @@
 {
     <div class="col-12">
         <p class="alert-danger">
-            @ViewBag.CheckMessages
+            <p class="alert alert-danger">@Html.Raw(ViewBag.CheckMessages)</p>
         </p>
     </div>
 }
@@ -52,7 +52,7 @@
     </div>
 </div>
 
-@* TODO https://getbootstrap.com/docs/5.1/forms/layout/#gutters *@@
+@* TODO https://getbootstrap.com/docs/5.1/forms/layout/#gutters *@
 @* TODO dizajn-checkout-info.txt *@
 <div class="row">
     <div class="col-12">
@@ -71,11 +71,11 @@
             </div>
             <div class="col-6 mb-3">
                 <label>Email addres</label>
-                <input type="text" name="EmailAddres" class="form-control" required />
+                <input type="text" name="Email" class="form-control" required />
             </div>
             <div class="col-6 mb-3">
                 <label>Phone</label>
-                <input type="text" name="Phone" class="form-control" required />
+                <input type="text" name="PhoneNumber" class="form-control" required />
             </div>
             <div class="col-6 mb-3">
                 <label>Address</label>
@@ -87,7 +87,7 @@
             </div>
             <div class="col-6 mb-3">
                 <label>ZIP code</label>
-                <input type="text" name="ZIPcode" class="form-control" required />
+                <input type="text" name="PostalCode" class="form-control" required />
             </div>
             <div class="col-6 mb-3">
                 <label>Country</label>
@@ -102,7 +102,10 @@
                 <label>Message</label>
                 <textarea type="text" name="Message" class="form-control" /></textarea>
             </div>
-
+            <div class="col-12 mb-3">
+                <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Index">coninue shoping</a>
+                <button class="btn btn-success" type="submit">Finish order</button>
+                </div>
         </form>
     </div>
 </div>

@@ -12,7 +12,8 @@ namespace DemoWebShop.Models
         [Required]
         public int OrderId { get; set; }
         [ForeignKey("OrderId")] // 1. nacin pisanj
-        public Category? Category { get; set; }
+
+        //public Category? Category { get; set; }
 
 
         [Required]

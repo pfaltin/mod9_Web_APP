@@ -4,6 +4,7 @@ using DemoWebShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoWebShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230420190917_RemOrdItmCat")]
+    partial class RemOrdItmCat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +109,7 @@ namespace DemoWebShop.Migrations
                             Id = "e4e48ebc - dde2 - 44ef - aa10 - f77c91acc588",
                             AccessFailedCount = 0,
                             Address = "Donji Glib 56",
-                            ConcurrencyStamp = "f57308d4-1614-4e8c-ad6f-50a89c162d7f",
+                            ConcurrencyStamp = "ce1bdc27-d24d-40b9-b334-067854cb551f",
                             Email = "admin@tvrtka.com",
                             EmailConfirmed = false,
                             FirstName = "Tvrtko",
@@ -115,9 +117,9 @@ namespace DemoWebShop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TVRTKA.COM",
                             NormalizedUserName = "ADMIN@TVRTKA.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJuM/mwO2HLX7iffxDUPjOf+IwsoT01Ac75vkjq7QI9Ratu0vWi9j2swfUh2r7MdoQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFZkfK3gyjwcxwhbBfBrc1nzg6xggiUVnfXgruKyh/Gaf7CrpJaUR9t0v8cdgwF8Ig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "24ac8dae-e365-4799-9f6e-83c46d4a12f4",
+                            SecurityStamp = "eaa1d496-3737-486d-b543-a376ff296ec2",
                             TwoFactorEnabled = false,
                             UserName = "admin@tvrtka.com"
                         });
@@ -285,6 +287,8 @@ namespace DemoWebShop.Migrations
 
                     b.HasKey("OrderItemId");
 
+                    b.HasIndex("OrderId");
+
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
@@ -429,14 +433,14 @@ namespace DemoWebShop.Migrations
                         new
                         {
                             Id = "5109cf15 - d38d - 4fe9 - b385 - 2972b2d2bb20",
-                            ConcurrencyStamp = "5347fbc5-3b2b-4b36-98a3-f8472e945d77",
+                            ConcurrencyStamp = "42b2794f-9e59-464c-b0c2-c671419f8bc5",
                             Name = "Admins",
                             NormalizedName = "ADMINS"
                         },
                         new
                         {
                             Id = "41112308 - 4603 - 420b - be22 - 3af8a2166be1",
-                            ConcurrencyStamp = "14eb197d-a454-4423-afb9-561ea9c8c328",
+                            ConcurrencyStamp = "fbc5951b-5c97-426c-8e5b-42b79b39e0b4",
                             Name = "Customers",
                             NormalizedName = "CUSTOMERS"
                         });
@@ -570,11 +574,19 @@ namespace DemoWebShop.Migrations
 
             modelBuilder.Entity("DemoWebShop.Models.OrderItem", b =>
                 {
+                    b.HasOne("DemoWebShop.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DemoWebShop.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Product");
                 });
