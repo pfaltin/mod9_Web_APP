@@ -1,0 +1,34 @@
+ProductId,Title,Description,InStock,Price,Image,SKU
+1,Apple,"Fresh, juicy apple from the local orchard",100,1.25,,K0001
+2,Banana,"Ripe, yellow banana picked at peak ripeness",75,0.75,,K0002
+3,Carrot,"Organic, locally grown carrot with vibrant color",50,0.50,,K0003
+4,Blueberries,Sweet and tangy blueberries freshly picked,30,2.50,,K0004
+5,Kale,Leafy green kale with a crisp texture,20,1.00,,K0005
+6,Orange,"Juicy, citrusy orange perfect for snacking",60,1.50,,K0006
+7,Spinach,Nutritious spinach packed with vitamins and minerals,15,0.75,,K0007
+8,Watermelon,"Sweet and refreshing watermelon, perfect for summer",10,5.00,,K0008
+9,Strawberries,"Plump, juicy strawberries with a bright red color",40,3.00,,K0009
+10,Broccoli,"Fresh, crunchy broccoli loaded with nutrients",25,1.25,,K0010
+11,Cucumber,"Crisp, cool cucumber ideal for salads and sandwiches",35,0.50,,K0011
+12,Avocado,"Creamy, rich avocado perfect for guacamole",5,2.00,,K0012
+13,Pineapple,"Tropical, juicy pineapple bursting with flavor",10,3.50,,K0013
+14,Tomato,"Vibrant, ripe tomato great for sandwiches and salads",45,0.75,,K0014
+15,Mango,"Sweet, juicy mango perfect for smoothies and desserts",15,2.50,,K0015
+16,Potato,"Versatile potato great for frying, baking, or mashing",30,0.50,,K0016
+17,Grapes,"Plump, juicy grapes bursting with flavor",20,2.00,,K0017
+18,Zucchini,"Fresh, tender zucchini perfect for grilling or sautéing",10,0.75,,K0018
+19,Cantaloupe,"Sweet and succulent cantaloupe, perfect for breakfast",8,4.00,,K0019
+20,Peppers,"Colorful, crisp peppers great for stuffing or stir-fry",15,1.50,,K0020
+21,Cauliflower,"Fresh, tender cauliflower loaded with nutrients",10,1.00,,K0021
+22,Lemon,"Tangy, bright lemon ideal for adding flavor to dishes",25,0.50,,K0022
+23,Cherry,Sweet and tart cherries perfect for snacking or baking,12,3.00,,K0023
+24,Onion,Flavorful onion great for sautéing or roasting,40,0.75,,K0024
+25,Eggplant,Versatile eggplant great for grilling or roasting,5,1.50,,K0025
+26,Peas,"Fresh, tender peas packed with vitamins",20,1.25,,K0026
+27,Corn,"Sweet, crisp corn perfect for grilling or boiling",15,0.75,,K0027
+28,Asparagus,"Tender, flavorful asparagus great for roasting or grilling",10,2.00,,K0028
+29,Artichoke,"Hearty, flavorful artichoke ideal for steaming or roasting",5,3.50,,K0029
+30,Green beans,"Crisp, tender green beans loaded with nutrients",25,1.00,,K0030
+31,Squash,"Fresh, tender squash great for grilling or sautéing",10,1.25,,K0031
+32,Pumpkin,"Hearty, flavorful pumpkin perfect for soups or pies",7,4.00,,K0032
+33,Radish,"Crunchy, spicy radish great for salads or pickling",20,0.50,,K0033

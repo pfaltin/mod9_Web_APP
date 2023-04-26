@@ -1,0 +1,33 @@
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Apple" AND c.Title = "Pome fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Banana" AND c.Title = "Berry fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Carrot" AND c.Title = "Root vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Blueberries" AND c.Title = "Berry fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Kale" AND c.Title = "Leafy green vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Orange" AND c.Title = "Citrus fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Spinach" AND c.Title = "Leafy green vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Watermelon" AND c.Title = "Pepo fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Strawberries" AND c.Title = "Berry fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Broccoli" AND c.Title = "Brassica vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Cucumber" AND c.Title = "Fruit vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Avocado" AND c.Title = "Berry fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Pineapple" AND c.Title = "Tropical fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Tomato" AND c.Title = "Fruit vegetable"
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Mango" AND c.Title = "Stone fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Potato" AND c.Title = "Tubers";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Grapes" AND c.Title = "Berry fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Zucchini" AND c.Title = "Fruit vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Cantaloupe" AND c.Title = "Pepo fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Peppers" AND c.Title = "Fruit vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Cauliflower" AND c.Title = "Brassica vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Lemon" AND c.Title = "Citrus fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Cherry" AND c.Title = "Stone fruit";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Onion" AND c.Title = "Bulb vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Eggplant" AND c.Title = "Fruit vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Peas" AND c.Title = "Legumes";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Corn" AND c.Title = "Grain";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Asparagus" AND c.Title = "Shoot vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Artichoke" AND c.Title = "Flower bud vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Green beans" AND c.Title = "Legumes";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Squash" AND c.Title = "Fruit vegetable"
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Pumpkin" AND c.Title = "Fruit vegetable";
+select ProductId, CategoryId from Products p, Categories c where p.Title = "Radish" AND c.Title = "Root vegetable";
